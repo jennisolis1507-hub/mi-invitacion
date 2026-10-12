@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación - José Antonio</title>
+    <title>José Antonio - Invitación</title>
     <style>
         * {
             margin: 0;
@@ -11,415 +11,151 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            min-height: 100vh;
+        body {
             background-color: #1a0a08;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            min-height: 100vh;
             font-family: 'Georgia', serif;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* --- ANIMACIONES Y EFECTOS --- */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            }
-            50% {
-                transform: scale(1.03);
-                box-shadow: 0 4px 18px rgba(252, 229, 136, 0.7);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            }
-        }
-
-        @keyframes floatMusic {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes subtleFade {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        /* ANIMACIÓN DE PARTÍCULAS DENTRO DEL LIENZO */
-        @keyframes floatAndGlow {
-            0% {
-                transform: translateY(100%) scale(0.3);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100%) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        /* Contenedor principal ajustado para NO cortarse abajo */
-        .contenedor-invitacion {
+        .contenedor-tarjeta {
             position: relative;
             width: 100%;
             max-width: 412px;
-            min-height: 100vh; /* Ocupa al menos el 100% del alto de la pantalla */
-            background-image: url('Imagenes/fondo.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0 40px 0;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
-            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            overflow: hidden; /* Evita desbordamiento de partículas */
-        }
-
-        /* Capa de partículas contenida exactamente dentro de la tarjeta */
-        .particulas-interiores {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .particula {
-            position: absolute;
-            background: #ffe38f;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #ffe38f, 0 0 15px #ffc107;
-            animation: floatAndGlow 7s infinite ease-in-out;
-        }
-
-        /* Botón de música con animación flotante */
-        .contenedor-musica {
-            position: relative;
-            z-index: 10;
-            width: 80%;
-            max-width: 320px;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            animation: floatMusic 3.5s ease-in-out infinite, fadeIn 1s ease-out;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .contenedor-musica img {
-            width: 100%;
-            height: auto;
+            margin: 0 auto;
             display: block;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-        }
-
-        .contenedor-musica:hover {
-            transform: scale(1.08) rotate(2deg);
-        }
-
-        /* Sección principal de la invitación */
-        .seccion-principal {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .img-ubicacion {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Botón real de ubicación con brillo y pulso sutil */
-        .btn-ubicacion-real {
-            position: absolute;
-            top: 35%; 
-            width: 30%;    
-            height: 4.5%;    
-
-            background: linear-gradient(135deg, #fce588, #dfbc54);
-            color: #2b1700;
-            font-family: 'Georgia', serif;
-            font-size: 9.5px; 
-            font-weight: bold;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
             text-decoration: none;
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            border: none;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             cursor: pointer;
-            z-index: 99;
-            animation: pulseGlow 3s infinite ease-in-out;
-            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .btn-ubicacion-real:hover {
-            transform: scale(1.1) translateY(-2px);
-            background: linear-gradient(135deg, #fff099, #e6c863);
-            box-shadow: 0 6px 15px rgba(252, 229, 136, 0.5);
-        }
-
-        /* IMAGEN DE FONDO DE LA CUENTA REGRESIVA */
-        .fondo-cuenta {
-            position: absolute;
-            top: 48%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 78%;
-            z-index: 5;
-            display: block;
-            pointer-events: none;
-        }
-
-        .fondo-cuenta img {
+        .imagen-inicio {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.4s ease;
         }
 
-        /* Texto FALTAN */
-        .texto-faltan {
+        .contenedor-tarjeta:hover .imagen-inicio {
+            transform: scale(1.02);
+        }
+
+        /* 1. Destello de luz diagonal sobre el sobre */
+        .brillo-sobre {
             position: absolute;
-            top: 58%;
+            top: 40%;
+            left: -100%;
+            width: 70%;
+            height: 25%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 223, 138, 0.35),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: barridoBrillo 3.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes barridoBrillo {
+            0% { left: -100%; }
+            30%, 100% { left: 150%; }
+        }
+
+        /* 2. Partículas doradas flotantes */
+        .chispas {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffd700, 0 0 12px #ffa500;
+            opacity: 0;
+            pointer-events: none;
+            animation: flotarChispa 3s infinite ease-in-out;
+        }
+
+        .chispa1 { top: 20%; left: 25%; animation-delay: 0s; }
+        .chispa2 { top: 30%; right: 20%; animation-delay: 1s; }
+        .chispa3 { top: 50%; left: 15%; animation-delay: 1.8s; }
+        .chispa4 { top: 65%; right: 25%; animation-delay: 0.5s; }
+
+        @keyframes flotarChispa {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateY(-15px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.3);
+            }
+        }
+
+        /* 3. Letrero indicador posicionado más arriba */
+        .letrero-indicador {
+            position: absolute;
+            bottom: 18%; /* Subimos la posición del letrero */
             left: 50%;
             transform: translateX(-50%);
-            font-family: 'Georgia', serif;
+            background: rgba(30, 12, 9, 0.88);
+            color: #fcebd9;
+            border: 1px solid #d4af37;
+            padding: 9px 20px;
+            border-radius: 25px;
             font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #fcebd9;
-            z-index: 10;
-            animation: subtleFade 4s infinite ease-in-out;
+            letter-spacing: 0.6px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            animation: flotarYBrillar 2.2s infinite ease-in-out;
         }
 
-        /* Cuenta regresiva */
-        .contador-container {
-            position: absolute;
-            top: 60.5%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 58%;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            color: #fcebd9;
-            z-index: 10;
-        }
-
-        .caja-tiempo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s ease;
-        }
-
-        .caja-tiempo:hover {
-            transform: scale(1.05);
-        }
-
-        .caja-tiempo span.numero {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .caja-tiempo span.etiqueta {
-            font-size: 9px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #fcebd9;
-            margin-top: 2px;
-        }
-
-        /* Texto ¡TE ESPERAMOS! */
-        .texto-te-esperamos {
-            position: absolute;
-            top: 66%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Georgia', serif;
-            font-size: 13px;
-            font-weight: normal;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #fcebd9;
-            text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-            z-index: 10;
-            animation: subtleFade 4s infinite ease-in-out;
+        @keyframes flotarYBrillar {
+            0%, 100% {
+                transform: translate(-50%, 0);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            }
+            50% {
+                transform: translate(-50%, -6px);
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="contenedor-invitacion">
+    <!-- Toda la pantalla es interactiva -->
+    <a href="invitacion.html" class="contenedor-tarjeta">
+        <!-- Imagen base de Figma -->
+        <img src="Imagenes/inicio.png" alt="Invitación José Antonio" class="imagen-inicio">
 
-        <!-- Capa interna de partículas doradas -->
-        <div class="particulas-interiores" id="particulas"></div>
+        <!-- Destello de luz sobre la zona del sobre -->
+        <div class="brillo-sobre"></div>
 
-        <!-- Música -->
-        <div class="contenedor-musica" onclick="toggleMusica()" title="Toca para reproducir o pausar la música">
-            <img src="Imagenes/musicaa.png" alt="Reproducir música">
+        <!-- Chispas doradas animadas -->
+        <div class="chispas chispa1"></div>
+        <div class="chispas chispa2"></div>
+        <div class="chispas chispa3"></div>
+        <div class="chispas chispa4"></div>
+
+        <!-- Letrero explicativo ubicado más arriba -->
+        <div class="letrero-indicador">
+            Toca la pantalla para abrir el sobre 
         </div>
+    </a>
 
-        <!-- Invitación y área interactiva -->
-        <div class="seccion-principal">
-
-            <img src="Imagenes/ubicacion.png" alt="Detalles de la invitación" class="img-ubicacion">
-
-            <!-- Botón interactivo real que abre Google Maps -->
-            <a href="https://www.google.com.mx/maps/place/Sal%C3%B3n+de+eventos+%22La+Pasadita%22/@19.5922803,-99.1762394,17z/data=!4m14!1m7!3m6!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!2sSal%C3%B3n+de+eventos+%22La+Pasadita%22!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf!3m5!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf?entry=ttu" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="btn-ubicacion-real" 
-               aria-label="Ver ubicación en Google Maps">
-               VER UBICACIÓN
-            </a>
-
-            <!-- Imagen cuenta.png de fondo -->
-            <div class="fondo-cuenta">
-                <img src="Imagenes/cuenta.png" alt="Fondo cuenta regresiva">
-            </div>
-
-            <!-- Texto FALTAN -->
-            <div class="texto-faltan">FALTAN</div>
-
-            <!-- Cuenta regresiva -->
-            <div class="contador-container" id="cuenta-regresiva">
-                <div class="caja-tiempo">
-                    <span class="numero" id="dias">00</span>
-                    <span class="etiqueta">Días</span>
-                </div>
-                <div class="caja-tiempo">
-                    <span class="numero" id="horas">00</span>
-                    <span class="etiqueta">Horas</span>
-                </div>
-                <div class="caja-tiempo">
-                    <span class="numero" id="minutos">00</span>
-                    <span class="etiqueta">Min</span>
-                </div>
-                <div class="caja-tiempo">
-                    <span class="numero" id="segundos">00</span>
-                    <span class="etiqueta">Seg</span>
-                </div>
-            </div>
-
-            <!-- Texto ¡TE ESPERAMOS! -->
-            <div class="texto-te-esperamos">¡TE ESPERAMOS!</div>
-
-        </div>
-
-        <!-- Archivo de música local -->
-        <audio id="audio-invitacion" loop>
-            <source src="Imagenes/musica.mp3" type="audio/mpeg">
-            Tu navegador no soporta audio.
-        </audio>
-
-    </div>
-
-    <script>
-        // Generar partículas doradas visibles distribuidas
-        document.addEventListener("DOMContentLoaded", () => {
-            const contenedorParticulas = document.getElementById("particulas");
-            const cantidad = 22;
-
-            for (let i = 0; i < cantidad; i++) {
-                const particula = document.createElement("div");
-                particula.classList.add("particula");
-                
-                const tamano = Math.random() * 5 + 3; // Tamaño entre 3px y 8px
-                particula.style.width = `${tamano}px`;
-                particula.style.height = `${tamano}px`;
-                
-                particula.style.left = `${Math.random() * 90 + 5}%`;
-                particula.style.top = `${Math.random() * 90 + 5}%`;
-                
-                particula.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                particula.style.animationDelay = `${Math.random() * 4}s`;
-                
-                contenedorParticulas.appendChild(particula);
-            }
-        });
-
-        const audio = document.getElementById("audio-invitacion");
-
-        async function toggleMusica() {
-            try {
-                if (audio.paused) {
-                    await audio.play();
-                } else {
-                    audio.pause();
-                }
-            } catch (error) {
-                console.log("Error al reproducir el audio:", error);
-            }
-        }
-
-        const fechaEvento = new Date(2027, 0, 9, 0, 0, 0).getTime();
-
-        function actualizarContador() {
-            const ahora = Date.now();
-            const diferencia = fechaEvento - ahora;
-
-            if (diferencia <= 0) {
-                document.getElementById("cuenta-regresiva").innerHTML =
-                    "<span style='color:#ffd700;font-size:14px;'>¡HOY ES EL DÍA!</span>";
-                clearInterval(intervaloContador);
-                return;
-            }
-
-            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-            document.getElementById("dias").textContent = String(dias).padStart(2, "0");
-            document.getElementById("horas").textContent = String(horas).padStart(2, "0");
-            document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
-            document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
-        }
-
-        const intervaloContador = setInterval(actualizarContador, 1000);
-        actualizarContador();
-    </script>
+</body>
+</html>
 
 </body>
 </html>
