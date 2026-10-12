@@ -62,7 +62,6 @@
             50% { opacity: 1; }
         }
 
-        /* --- NUEVA ANIMACIÓN DE PARTÍCULAS MÁS BRILLANTES --- */
         @keyframes floatAndGlow {
             0% {
                 transform: translateY(100px) scale(0.3);
@@ -89,10 +88,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 0 40px 0;
+            padding: 20px 0 70px 0; /* Aumentado el padding inferior para dar espacio a los globos */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             overflow: hidden;
+        }
+
+        /* Rectángulo de extensión inferior para evitar cortes en los globos */
+        .rectangulo-inferior-globos {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Altura del rectángulo para contener la parte baja */
+            background-color: #1a0a08; /* Mismo tono oscuro base para fusionarse */
+            z-index: 4;
+            pointer-events: none;
         }
 
         /* Capa de partículas con alta visibilidad DENTRO de la invitación */
@@ -103,7 +114,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2; /* Sobre el fondo marrón, detrás de botones y cuadros */
+            z-index: 2;
         }
 
         .particula {
@@ -158,23 +169,23 @@
         /* Botón real de ubicación con brillo y pulso sutil */
         .btn-ubicacion-real {
             position: absolute;
-            top: 35%; 
+            top: 35%;
             width: 30%;    
             height: 4.5%;    
 
             background: linear-gradient(135deg, #fce588, #dfbc54);
             color: #2b1700;
             font-family: 'Georgia', serif;
-            font-size: 9.5px; 
+            font-size: 9.5px;
             font-weight: bold;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             text-decoration: none;
-            
+           
             display: flex;
             justify-content: center;
             align-items: center;
-            
+           
             border: none;
             border-radius: 30px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -287,6 +298,9 @@
 
     <div class="contenedor-invitacion">
 
+        <!-- Rectángulo marrón en la parte inferior para evitar que los globos se vean cortados de tajo -->
+        <div class="rectangulo-inferior-globos"></div>
+
         <!-- Capa interna de partículas doradas bien brillantes -->
         <div class="particulas-interiores" id="particulas"></div>
 
@@ -301,10 +315,10 @@
             <img src="Imagenes/ubicacion.png" alt="Detalles de la invitación" class="img-ubicacion">
 
             <!-- Botón interactivo real que abre Google Maps -->
-            <a href="https://www.google.com.mx/maps/place/Sal%C3%B3n+de+eventos+%22La+Pasadita%22/@19.5922803,-99.1762394,17z/data=!4m14!1m7!3m6!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!2sSal%C3%B3n+de+eventos+%22La+Pasadita%22!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf!3m5!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf?entry=ttu" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="btn-ubicacion-real" 
+            <a href="https://www.google.com.mx/maps/place/Sal%C3%B3n+de+eventos+%22La+Pasadita%22/@19.5922803,-99.1762394,17z/data=!4m14!1m7!3m6!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!2sSal%C3%B3n+de+eventos+%22La+Pasadita%22!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf!3m5!1s0x85d1f63cf6f5f285:0x3c17780a99438ca1!8m2!3d19.5922803!4d-99.1762394!16s%2Fg%2F11b66hhmvf?entry=ttu"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-ubicacion-real"
                aria-label="Ver ubicación en Google Maps">
                VER UBICACIÓN
             </a>
@@ -359,20 +373,20 @@
             for (let i = 0; i < cantidad; i++) {
                 const particula = document.createElement("div");
                 particula.classList.add("particula");
-                
+               
                 // Variación de tamaño visible (4px a 9px)
                 const tamano = Math.random() * 5 + 4;
                 particula.style.width = `${tamano}px`;
                 particula.style.height = `${tamano}px`;
-                
+               
                 // Distribución aleatoria sobre toda la invitación
                 particula.style.left = `${Math.random() * 92 + 4}%`;
                 particula.style.top = `${Math.random() * 90 + 5}%`;
-                
+               
                 // Tiempos variables para animación natural
                 particula.style.animationDuration = `${Math.random() * 4 + 4}s`;
                 particula.style.animationDelay = `${Math.random() * 5}s`;
-                
+               
                 contenedorParticulas.appendChild(particula);
             }
         });
