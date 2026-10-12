@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Antonio - Invitación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a0a08;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+
+        .contenedor-tarjeta {
+            position: relative;
+            width: 100%;
+            max-width: 412px;
+            margin: 0 auto;
+            display: block;
+            text-decoration: none;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            cursor: pointer;
+        }
+
+        .imagen-inicio {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .contenedor-tarjeta:hover .imagen-inicio {
+            transform: scale(1.02);
+        }
+
+        /* 1. Destello de luz diagonal sobre el sobre */
+        .brillo-sobre {
+            position: absolute;
+            top: 40%;
+            left: -100%;
+            width: 70%;
+            height: 25%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 223, 138, 0.35),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: barridoBrillo 3.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes barridoBrillo {
+            0% { left: -100%; }
+            30%, 100% { left: 150%; }
+        }
+
+        /* 2. Partículas doradas flotantes */
+        .chispas {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffd700, 0 0 12px #ffa500;
+            opacity: 0;
+            pointer-events: none;
+            animation: flotarChispa 3s infinite ease-in-out;
+        }
+
+        .chispa1 { top: 20%; left: 25%; animation-delay: 0s; }
+        .chispa2 { top: 30%; right: 20%; animation-delay: 1s; }
+        .chispa3 { top: 50%; left: 15%; animation-delay: 1.8s; }
+        .chispa4 { top: 65%; right: 25%; animation-delay: 0.5s; }
+
+        @keyframes flotarChispa {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateY(-15px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.3);
+            }
+        }
+
+        /* 3. Letrero indicador posicionado más arriba */
+        .letrero-indicador {
+            position: absolute;
+            bottom: 18%; /* Subimos la posición del letrero */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 12, 9, 0.88);
+            color: #fcebd9;
+            border: 1px solid #d4af37;
+            padding: 9px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            letter-spacing: 0.6px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            animation: flotarYBrillar 2.2s infinite ease-in-out;
+        }
+
+        @keyframes flotarYBrillar {
+            0%, 100% {
+                transform: translate(-50%, 0);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            }
+            50% {
+                transform: translate(-50%, -6px);
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toda la pantalla es interactiva -->
+    <a href="invitacion.html" class="contenedor-tarjeta">
+        <!-- Imagen base de Figma -->
+        <img src="Imagenes/inicio.png" alt="Invitación José Antonio" class="imagen-inicio">
+
+        <!-- Destello de luz sobre la zona del sobre -->
+        <div class="brillo-sobre"></div>
+
+        <!-- Chispas doradas animadas -->
+        <div class="chispas chispa1"></div>
+        <div class="chispas chispa2"></div>
+        <div class="chispas chispa3"></div>
+        <div class="chispas chispa4"></div>
+
+        <!-- Letrero explicativo ubicado más arriba -->
+        <div class="letrero-indicador">
+            Toca la pantalla para abrir el sobre 
+        </div>
+    </a>
+
+</body>
+</html>
