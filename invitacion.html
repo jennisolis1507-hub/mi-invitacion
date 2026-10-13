@@ -63,20 +63,20 @@
             50% { opacity: 1; }
         }
 
-        /* ANIMACIÓN DE PARTÍCULAS DENTRO DEL LIENZO */
+        /* ANIMACIÓN DE PARTÍCULAS: ASCENSO LENTO Y FLUIDO */
         @keyframes floatAndGlow {
             0% {
-                transform: translateY(100%) scale(0.3);
+                transform: translateY(105vh) scale(0.5);
                 opacity: 0;
             }
-            20% {
-                opacity: 1;
+            15% {
+                opacity: 0.9;
             }
-            80% {
-                opacity: 1;
+            85% {
+                opacity: 0.9;
             }
             100% {
-                transform: translateY(-100%) scale(1.2);
+                transform: translateY(-10vh) scale(1.4);
                 opacity: 0;
             }
         }
@@ -100,19 +100,19 @@
             overflow: hidden;
         }
 
-        /* Franja café colocada más arriba, cubriendo la parte inferior de los globos */
+        /* Franja café colocada más arriba */
         .franja-cierre {
             position: absolute;
-            bottom: 0px; /* Sube la franja para que caiga encima de los globos y oculte sus cortes */
+            bottom: 0px;
             left: 0;
             width: 100%;
-            height: 90px; /* Altura suficiente para cubrir el área hacia abajo */
-            background-color: #3b160b; /* Tono café exacto del fondo */
-            z-index: 15; /* Mayor prioridad para colocarse ENCIMA de los globos de la imagen de fondo */
-            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.7); /* Sombra elegante que delimita el corte */
+            height: 90px;
+            background-color: #3b160b;
+            z-index: 15;
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.7);
         }
 
-        /* Capa de partículas contenida exactamente dentro de la tarjeta */
+        /* CAPA DE PARTÍCULAS: Detrás de todos los elementos (z-index: 1) */
         .particulas-interiores {
             position: absolute;
             top: 0;
@@ -120,15 +120,16 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 1; 
         }
 
         .particula {
             position: absolute;
-            background: #ffe38f;
+            background: #ffffff; /* Núcleo claro */
             border-radius: 50%;
-            box-shadow: 0 0 8px #ffe38f, 0 0 15px #ffc107;
-            animation: floatAndGlow 7s infinite ease-in-out;
+            /* Brillo dorado destacado */
+            box-shadow: 0 0 12px #fff6b0, 0 0 22px #ffe38f, 0 0 35px #ffc107;
+            animation: floatAndGlow linear infinite;
         }
 
         /* Botón de música con animación flotante */
@@ -153,6 +154,30 @@
 
         .contenedor-musica:hover {
             transform: scale(1.08) rotate(2deg);
+        }
+
+        /* CONTENEDOR PARA LA IMAGEN DEL SOBRE CON ANIMACIÓN */
+        .contenedor-sobre {
+            position: relative;
+            z-index: 20;
+            width: 90%;
+            max-width: 360px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            animation: fadeIn 1.5s ease-out, floatMusic 4s ease-in-out infinite 1.5s;
+        }
+
+        .contenedor-sobre img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 6px 15px rgba(0,0,0,0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .contenedor-sobre:hover img {
+            transform: scale(1.03);
         }
 
         /* Sección principal de la invitación */
@@ -307,12 +332,17 @@
         <!-- Franja café colocada ENCIMA de la parte inferior de los globos -->
         <div class="franja-cierre"></div>
 
-        <!-- Capa interna de partículas doradas -->
+        <!-- Capa interna de partículas (al fondo, z-index: 1) -->
         <div class="particulas-interiores" id="particulas"></div>
 
         <!-- Música -->
         <div class="contenedor-musica" onclick="toggleMusica()" title="Toca para reproducir o pausar la música">
             <img src="Imagenes/musicaa.png" alt="Reproducir música">
+        </div>
+
+        <!-- IMAGEN DEL SOBRE (jose.png) CON ANIMACIÓN -->
+        <div class="contenedor-sobre">
+            <img src="Imagenes/jose.png" alt="Sobre de invitación - José Antonio">
         </div>
 
         <!-- Invitación y área interactiva -->
@@ -371,24 +401,24 @@
     </div>
 
     <script>
-        // Generar partículas doradas visibles distribuidas
+        // Generar partículas que suben despacio por detrás
         document.addEventListener("DOMContentLoaded", () => {
             const contenedorParticulas = document.getElementById("particulas");
-            const cantidad = 22;
+            const cantidad = 30;
 
             for (let i = 0; i < cantidad; i++) {
                 const particula = document.createElement("div");
                 particula.classList.add("particula");
                 
-                const tamano = Math.random() * 5 + 3; // Tamaño entre 3px y 8px
+                const tamano = Math.random() * 6 + 5; // Tamaño entre 5px y 11px
                 particula.style.width = `${tamano}px`;
                 particula.style.height = `${tamano}px`;
                 
-                particula.style.left = `${Math.random() * 90 + 5}%`;
-                particula.style.top = `${Math.random() * 90 + 5}%`;
+                particula.style.left = `${Math.random() * 92 + 4}%`;
                 
-                particula.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                particula.style.animationDelay = `${Math.random() * 4}s`;
+                // Duración prolongada (12s a 18s) para que suban despacio
+                particula.style.animationDuration = `${Math.random() * 6 + 12}s`;
+                particula.style.animationDelay = `${Math.random() * 10}s`;
                 
                 contenedorParticulas.appendChild(particula);
             }
@@ -435,6 +465,5 @@
         const intervaloContador = setInterval(actualizarContador, 1000);
         actualizarContador();
     </script>
-
 </body>
 </html>
